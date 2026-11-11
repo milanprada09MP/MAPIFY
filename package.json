@@ -9,6 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"
@@ -20,4 +21,6 @@
     "typescript": "^5"
   }
 }
+
+
 
