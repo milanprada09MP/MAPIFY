@@ -65,12 +65,39 @@ export default function CardPage() {
         </p>
 
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            alert(
-              "Tampilan formulir berhasil! Sistem aktivasi belum terhubung."
-            );
-          }}
+          
+onSubmit={async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch("/api/activate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cardCode: code,
+        activationCode,
+        businessName,
+        whatsapp,
+        reviewUrl,
+      }),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      alert(result.error || "Aktivasi gagal.");
+      return;
+    }
+
+    alert("Kartu MAPIFY berhasil diaktifkan!");
+    window.location.reload();
+  } catch {
+    alert("Terjadi kesalahan koneksi. Coba lagi.");
+  }
+}}
+
           style={{
             display: "grid",
             gap: "16px",
