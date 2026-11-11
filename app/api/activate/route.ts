@@ -133,10 +133,17 @@ export async function POST(request: NextRequest) {
       success: true,
       message: "Kartu MAPIFY berhasil diaktifkan!",
     });
-  } catch {
-    return NextResponse.json(
-      { error: "Permintaan tidak dapat diproses." },
-      { status: 400 }
-    );
-  }
+ 
+} catch (error) {
+  console.error(
+    "MAPIFY activation error:",
+    error instanceof Error ? error.message : "Unknown error"
+  );
+
+  return NextResponse.json(
+    { error: "Permintaan tidak dapat diproses." },
+    { status: 500 }
+  );
+}
+
 }
