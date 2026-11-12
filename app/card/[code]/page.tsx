@@ -3,6 +3,7 @@
 
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import type { FormEvent } from "react";
 
 type CardStatus =
   | "checking"
@@ -20,6 +21,7 @@ function isValidGoogleReviewUrl(value: string) {
       "google.com",
       "www.google.com",
       "maps.google.com",
+      "search.google.com",
     ];
 
     return (
@@ -27,7 +29,7 @@ function isValidGoogleReviewUrl(value: string) {
       allowedHosts.includes(url.hostname) &&
       !url.username &&
       !url.password &&
-      !url.pathname.includes("CONTOH")
+      !url.pathname.toUpperCase().includes("CONTOH")
     );
   } catch {
     return false;
@@ -107,7 +109,7 @@ export default function CardPage() {
   };
 
   async function handleActivation(
-    e: React.FormEvent<HTMLFormElement>
+    e: FormEvent<HTMLFormElement>
   ) {
     e.preventDefault();
 
@@ -131,7 +133,7 @@ export default function CardPage() {
           activationCode,
           businessName,
           whatsapp,
-          reviewUrl,
+          reviewUrl: reviewUrl.trim(),
         }),
       });
 
@@ -357,3 +359,4 @@ export default function CardPage() {
     </main>
   );
 }
+
