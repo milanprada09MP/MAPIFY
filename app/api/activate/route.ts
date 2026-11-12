@@ -68,6 +68,7 @@ export async function POST(request: NextRequest) {
       "google.com",
       "www.google.com",
       "maps.google.com",
+      "search.google.com",
       "g.page",
     ];
 
